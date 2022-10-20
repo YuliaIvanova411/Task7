@@ -23,6 +23,9 @@ data class Post (
 
 object WallService {
     private var posts = emptyArray<Post>()
+    fun clear() {
+        posts = emptyArray()
+    }
     fun add(post: Post): Post {
         posts += post.copy(id = post.id + 1)
         return posts.last()
