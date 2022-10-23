@@ -1,11 +1,11 @@
-class Comments (
+ data class Comments (
     val count: Int = 0,
     val canPost: Boolean = true,
     val groopsCanPost: Boolean = true,
     val canClose: Boolean = true,
     val canOpen: Boolean = true
 )
-val comment = Comments (1)
+//val comment = Comments (1)
 
 data class Post (
     val id: Int = 1,
@@ -22,12 +22,12 @@ data class Post (
 
 
 object WallService {
-    private var posts = emptyArray<Post>()
+    var posts = emptyArray<Post>()
     fun clear() {
         posts = emptyArray()
     }
     fun add(post: Post): Post {
-        posts += post.copy(id = post.id + 1)
+        posts += post.copy(id = post.id)
         return posts.last()
     }
     fun print() {
@@ -45,11 +45,16 @@ object WallService {
         }
         return result
     }
+
 }
 
 
 fun main() {
 
-    WallService.add(Post(2, comments = comment))
+    val post1 = Post(1, comments = Comments(1))
+    WallService.add(post1)
+    val post2 = Post (2, comments = Comments(0))
+    WallService.add(post2)
     WallService.print()
+
 }

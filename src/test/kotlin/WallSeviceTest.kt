@@ -1,22 +1,42 @@
-import org.junit.Assert.assertEquals
 import org.junit.Before
+
+import org.junit.Assert.assertEquals
+
 import org.junit.Test
 
 class WallServiceTest {
-    @Before
-    fun clearBeforeTest() {
-        WallService.clear()
+ @Before
+ fun clearBeforeTest() {
+    WallService.clear()
+ }
+    @Test
+    fun ifIdNotZero (){
+        var posts = emptyArray<Post>()
+        val post1 = Post(1, comments = Comments(1))
+
+        WallService.add(post1)
+        val result = if (posts.last().id > 0) true else false
+
+        assertEquals(true, result)
+
     }
 
     @Test
-    fun ifAdd() {
+    fun ifIdExists() {
+        var posts = emptyArray<Post>()
+        val post1 = Post(1, comments = Comments(1))
 
-        val post = Post (id = 2, comments = comment)
+        val result = WallService.update(1)
 
-        val result = WallService.add(post)
-        //добавить проверку на больше нуля
+        assertEquals(true, result)
+    }
 
-        assertEquals (true, result)
+    @Test
+    fun ifIdDoesntExist() {
 
+        val result = WallService.update(13)
+
+        assertEquals(false, result)
     }
 }
+
