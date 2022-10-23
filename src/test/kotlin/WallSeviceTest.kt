@@ -11,12 +11,12 @@ class WallServiceTest {
  }
   @Test
   fun ifIdNotZero () {
-      var posts = emptyArray<Post>()
-      val post1 = Post(1, comments = Comments(1))
+     var posts = emptyArray<Post>()
+     val post1 = Post(1, comments = Comments(1))
 
-      WallService.add(post1)
-      val lastId = posts.last().id
-      val result = if (lastId > 0) true else false
+
+      val (id) = WallService.add(post1)
+      val result = if (id > 0) true else false
 
       assertEquals(true, result)
 

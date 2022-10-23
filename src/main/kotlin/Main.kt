@@ -5,7 +5,7 @@
     val canClose: Boolean = true,
     val canOpen: Boolean = true
 )
-//val comment = Comments (1)
+
 
 data class Post (
     val id: Int = 1,
@@ -28,7 +28,6 @@ object WallService {
     }
     fun add(post: Post): Post {
         posts += post.copy(id = post.id)
-        val lastId = posts.last().id
         return posts.last()
     }
     fun print() {
