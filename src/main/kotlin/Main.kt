@@ -27,7 +27,7 @@ object WallService {
         posts = emptyArray()
     }
     fun add(post: Post): Post {
-        posts += post.copy(id = post.id)
+        posts += post.copy(id = post.id+1)
         return posts.last()
     }
     fun print() {
