@@ -9,22 +9,24 @@ class WallServiceTest {
  fun clearBeforeTest() {
     WallService.clear()
  }
-    @Test
-    fun ifIdNotZero (){
-        var posts = emptyArray<Post>()
-        val post1 = Post(1, comments = Comments(1))
+  @Test
+  fun ifIdNotZero () {
+      var posts = emptyArray<Post>()
+      val post1 = Post(1, comments = Comments(1))
 
-        WallService.add(post1)
-        val result = if (posts.last().id > 0) true else false
+      WallService.add(post1)
+      val lastId = posts.last().id
+      val result = if (lastId > 0) true else false
 
-        assertEquals(true, result)
+      assertEquals(true, result)
 
-    }
-
+  }
     @Test
     fun ifIdExists() {
         var posts = emptyArray<Post>()
         val post1 = Post(1, comments = Comments(1))
+
+        WallService.add(post1)
 
         val result = WallService.update(1)
 
@@ -33,6 +35,10 @@ class WallServiceTest {
 
     @Test
     fun ifIdDoesntExist() {
+        var posts = emptyArray<Post>()
+        val post1 = Post(1, comments = Comments(1))
+
+        WallService.add(post1)
 
         val result = WallService.update(13)
 
