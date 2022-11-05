@@ -1,6 +1,7 @@
 import org.junit.Before
 
-import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
+import org.junit.Assert.assertFalse
 
 import org.junit.Test
 
@@ -18,7 +19,7 @@ class WallServiceTest {
       val (id) = WallService.add(post1)
       val result = if (id > 0) true else false
 
-      assertEquals(true, result)
+      assertTrue(result)
 
   }
     @Test
@@ -28,9 +29,9 @@ class WallServiceTest {
 
         WallService.add(post1)
 
-        val result = WallService.update(1)
+        val result = WallService.update(post1)
 
-        assertEquals(true, result)
+        assertTrue(result)
     }
 
     @Test
@@ -40,9 +41,9 @@ class WallServiceTest {
 
         WallService.add(post1)
 
-        val result = WallService.update(13)
+        val result = WallService.update(post1)
 
-        assertEquals(false, result)
+        assertFalse(result)
     }
 }
 

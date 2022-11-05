@@ -7,8 +7,9 @@
 )
 
 
-data class Post (
-    val id: Int = 1,
+data class Post(
+    var id: Int = 1,
+    val data: Int = 1560507488,
     val fromId: Int = 2,
     val text: String = "Something written",
     val friendsOnly: Boolean = false,
@@ -23,22 +24,25 @@ data class Post (
 
 object WallService {
     var posts = emptyArray<Post>()
+
     fun clear() {
         posts = emptyArray()
     }
     fun add(post: Post): Post {
-        posts += post.copy(id = post.id)
+        var newId: Int = { if (posts == emptyArray<Post>()) 1
+        else (posts.last().id + 1) }
+        posts += post.copy(id = newId)
         return posts.last()
     }
     fun print() {
         println(posts)
     }
 
-    fun update(id: Int): Boolean {
+    fun update(post: Post): Boolean {
         var result = false
         for ((index, post) in posts.withIndex()) {
-            if (post.id == id) {
-                posts[index] = post.copy()
+            if (post.id == index) {
+                posts[index] = post.copy(id = posts[index].id, data = posts[index].data )
                 result = true
             }
 
