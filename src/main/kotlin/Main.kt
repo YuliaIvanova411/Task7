@@ -29,8 +29,8 @@ object WallService {
         posts = emptyArray()
     }
     fun add(post: Post): Post {
-        var newId: Int = { if (posts == emptyArray<Post>()) 1
-        else (posts.last().id + 1) }
+        val newId: Int = if (posts.isEmpty()) 1
+        else (posts.last().id + 1)
         posts += post.copy(id = newId)
         return posts.last()
     }
