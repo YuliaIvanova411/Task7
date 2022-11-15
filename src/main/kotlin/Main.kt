@@ -40,8 +40,8 @@ object WallService {
 
     fun update(post: Post): Boolean {
         var result = false
-        for ((index, post) in posts.withIndex()) {
-            if (post.id == index) {
+        for ((index, oldPost) in posts.withIndex()) {
+            if (post.id == oldPost.id) {
                 posts[index] = post.copy(id = posts[index].id, data = posts[index].data )
                 result = true
             }

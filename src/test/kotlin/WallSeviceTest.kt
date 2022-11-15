@@ -25,7 +25,7 @@ class WallServiceTest {
     @Test
     fun ifIdExists() {
         var posts = emptyArray<Post>()
-        val post1 = Post(1, comments = Comments(1))
+        val post1 = Post(posts.last().id + 1, comments = Comments(1))
 
         WallService.add(post1)
 
