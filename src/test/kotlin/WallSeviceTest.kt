@@ -1,7 +1,5 @@
+import org.junit.Assert.*
 import org.junit.Before
-
-import org.junit.Assert.assertTrue
-import org.junit.Assert.assertFalse
 
 import org.junit.Test
 
@@ -10,40 +8,74 @@ class WallServiceTest {
  fun clearBeforeTest() {
     WallService.clear()
  }
-  @Test
-  fun ifIdNotZero () {
-     var posts = emptyArray<Post>()
-     val post1 = Post(1, comments = Comments(1))
-
-
-      val (id) = WallService.add(post1)
-      val result = if (id > 0) true else false
-
-      assertTrue(result)
-
-  }
     @Test
-    fun ifIdExists() {
-        var posts = emptyArray<Post>()
-        val post1 = Post( 1, comments = Comments(1))
+    fun add() {
+        val testPost = Post(
+            text = "test",
+            date = 101010,
+            copyright = null,
+            postSource = null,
+            geo = null,
+            donut = null
+        )
 
-        WallService.add(post1)
-
-        val result = WallService.update(post1)
-
-        assertTrue(result)
+        WallService.add(testPost)
+        val result = testPost.id
+        assertEquals(0, result)
     }
 
     @Test
-    fun ifIdDoesntExist() {
-        var posts = emptyArray<Post>()
-        val post1 = Post(-15, comments = Comments(1))
+    fun updateIdIsFound() {
+        val post = Post(
+            id = 1,
+            date = 101022,
+            copyright = null,
+            postSource = null,
+            geo = null,
+            donut = null
+        )
 
-        WallService.add(post1)
+        WallService.add(post)
+
+        val post1 = Post(
+            id = post.id,
+            text = "test",
+            date = 111010,
+            copyright = null,
+            postSource = null,
+            geo = null,
+            donut = null
+        )
 
         val result = WallService.update(post1)
+        assertTrue( result)
+    }
 
+    @Test
+    fun updateIdNotFound() {
+        val post = Post(
+            text = "test",
+            date = 101010,
+            copyright = null,
+            postSource = null,
+            geo = null,
+            donut = null
+        )
+
+
+        WallService.add(post)
+
+        val post1 = Post(
+            id = 0,
+            text = "test",
+            date = 111010,
+            copyright = null,
+            postSource = null,
+            geo = null,
+            donut = null
+        )
+
+        val result = WallService.update(post1)
         assertFalse(result)
     }
 }
-
