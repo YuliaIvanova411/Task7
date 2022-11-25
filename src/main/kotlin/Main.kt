@@ -215,6 +215,7 @@ data class LinkAttachment(val link: Link) : Attachment {
     override val type: String = "link"
 }
 
+class PostNotFoundException(message: String) : RuntimeException(message)
 
 object WallService {
     var posts = emptyArray<Post>()
@@ -267,6 +268,21 @@ object WallService {
             }
         }
         return false
+    }
+    private var comments = emptyArray<Comments>()
+
+    fun createComment(postId: Int, comment: Comments): Comments {
+        val newComment = findPostById(postId) ?: throw PostNotFoundException("Post with $postId not found")
+        comments += comment
+        return comments.last()
+    }
+    private fun findPostById(postId: Int): Post? {
+        for ((index, post) in posts.withIndex()) {
+            if (post.id == postId) {
+                return post
+            }
+        }
+        return null
     }
     }
 
